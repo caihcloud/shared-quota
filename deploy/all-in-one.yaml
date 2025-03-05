@@ -292,7 +292,7 @@ spec:
       serviceAccountName: sharedquota-manager
       containers:
       - name: sharedquota-controller
-        image: registry.cn-hangzhou.aliyuncs.com/caihcloud/sharedquota-controller:v0.1.0
+        image: ghcr.io/caihcloud/shared-quota-controller:latest
         imagePullPolicy: IfNotPresent
         command:
         - /manager
