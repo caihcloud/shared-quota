@@ -1,0 +1,21 @@
+apiVersion: quota.caih.com/v1
+kind: SharedQuota
+metadata:
+  labels:
+    app.kubernetes.io/name: shared-quota
+    app.kubernetes.io/managed-by: kustomize
+  name: sharedquota-sample
+spec:
+  selector:
+    environment: production
+  quota:
+    hard:
+      pods: "10"
+      cpu: "20"
+      memory: "40Gi"
+      requests.storage: "100Gi"
+      limits.cpu: "20"
+      limits.memory: "40Gi"
+      persistentvolumeclaims: "10"
+      requests.cpu: "10"
+      requests.memory: "30Gi"

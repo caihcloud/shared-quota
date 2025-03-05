@@ -1,0 +1,28 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: sharedquota-webhook
+  annotations:
+    cert-manager.io/inject-ca-from: kube-system/sharedquota
+webhooks:
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      service:
+        name: sharedquota-webhook
+        namespace: kube-system
+        path: /validate-quota-caih-com-v1
+    failurePolicy: Fail
+    name: sharedquotas.quota.caih.com
+    rules:
+      - apiGroups:
+          - ""
+        apiVersions:
+          - v1
+        operations:
+          - CREATE
+          - UPDATE
+          - DELETE
+        resources:
+          - pods
+    sideEffects: None

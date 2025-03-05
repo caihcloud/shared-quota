@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  namespace: kube-system
+  name: sharedquota-selfsigned-issuer
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  namespace: kube-system
+  name: sharedquota
+spec:
+  dnsNames:
+  - 'sharedquota-webhook.kube-system.svc'
+  - 'sharedquota-webhook.kube-system.svc.cluster.local'
+  issuerRef:
+    kind: Issuer
+    name: 'sharedquota-selfsigned-issuer'
+  secretName: sharedquota

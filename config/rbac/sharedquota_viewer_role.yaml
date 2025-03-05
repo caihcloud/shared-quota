@@ -1,0 +1,29 @@
+# This rule is not used by the project shared-quota itself.
+# It is provided to allow the cluster admin to help manage permissions for users.
+#
+# Grants read-only access to quota.caih.com resources.
+# This role is intended for users who need visibility into these resources
+# without permissions to modify them. It is ideal for monitoring purposes and limited-access viewing.
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: shared-quota
+    app.kubernetes.io/managed-by: kustomize
+  name: sharedquota-viewer-role
+rules:
+- apiGroups:
+  - quota.caih.com
+  resources:
+  - sharedquotas
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - quota.caih.com
+  resources:
+  - sharedquotas/status
+  verbs:
+  - get
